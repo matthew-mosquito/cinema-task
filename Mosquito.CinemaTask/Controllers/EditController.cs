@@ -7,20 +7,20 @@ using System.Web.Mvc;
 
 namespace Mosquito.CinemaTask.Controllers
 {
-    public class HomeController : Controller
+    public class EditController : Controller
     {
+        // GET: Edit
         public ActionResult Index()
         {
-            // Invoke service function to get list
-            // Return List to the view
             return View();
         }
 
+
+        // POST: Film Updates
         [HttpPost]
-        public ActionResult Delete(FilmModel model)
+        public ActionResult Edit(FilmModel model)
         {
-            // Invoke Service Function to Delete record
-            // Return Index
+            // Invoke Service function to edit (Find which one to edit by Id)
             return View();
         }
     }
