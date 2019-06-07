@@ -12,10 +12,10 @@ namespace Mosquito.CinemaTask.Services.Interfaces
         // Add a film
         bool AddFilm(FilmModel model);
 
-        // Delete a film
-        bool DeleteFilm(FilmModel model);
-
         // Edit a Film
         bool EditFilm(FilmModel model);
+
+        // Delete a film
+        bool DeleteFilm(FilmModel model);
     }
 }
