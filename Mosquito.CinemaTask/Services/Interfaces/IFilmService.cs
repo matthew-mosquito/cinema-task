@@ -17,5 +17,8 @@ namespace Mosquito.CinemaTask.Services.Interfaces
 
         // Delete a film
         bool DeleteFilm(FilmModel model);
+
+        // Get films
+        IEnumerable<FilmModel> GetAllCalls();
     }
 }
