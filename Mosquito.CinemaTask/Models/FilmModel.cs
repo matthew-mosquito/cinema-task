@@ -8,6 +8,7 @@ namespace Mosquito.CinemaTask.Models
 {
     public class FilmModel
     {
+        public int Id { get; set; }
 
         [Required]
         [StringLength(40)]
