@@ -9,12 +9,13 @@ namespace Mosquito.CinemaTask.Services
 {
     public class FilmServices : IFilmService
     {
-        public bool AddFilm(FilmModel model)
+
+        public IEnumerable<FilmModel> GetAllFilms()
         {
             throw new NotImplementedException();
         }
 
-        public bool DeleteFilm(FilmModel model)
+        public bool AddFilm(FilmModel model)
         {
             throw new NotImplementedException();
         }
@@ -24,7 +25,7 @@ namespace Mosquito.CinemaTask.Services
             throw new NotImplementedException();
         }
 
-        public IEnumerable<FilmModel> GetAllCalls()
+        public bool DeleteFilm(FilmModel model)
         {
             throw new NotImplementedException();
         }

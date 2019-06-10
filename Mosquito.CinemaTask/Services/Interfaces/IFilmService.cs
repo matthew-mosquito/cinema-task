@@ -9,6 +9,9 @@ namespace Mosquito.CinemaTask.Services.Interfaces
 {
     interface IFilmService
     {
+        // Get films
+        IEnumerable<FilmModel> GetAllFilms();
+
         // Add a film
         bool AddFilm(FilmModel model);
 
@@ -18,7 +21,5 @@ namespace Mosquito.CinemaTask.Services.Interfaces
         // Delete a film
         bool DeleteFilm(FilmModel model);
 
-        // Get films
-        IEnumerable<FilmModel> GetAllCalls();
     }
 }
