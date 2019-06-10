@@ -1,19 +1,22 @@
 ﻿using Mosquito.CinemaTask.Models;
 using Mosquito.CinemaTask.Repositories.Interfaces;
 using Mosquito.CinemaTask.Mapper;
+using Mosquito.CinemaTask.Logger;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
+using System;
 
 
 namespace Mosquito.CinemaTask.Repositories
 {
     public class FilmRepository : IFilmRepository, IDatabase
     {
-
-        // Get the SQL Connection
+        public FilmRepository()
+        {
+            FilmLogging logger = new FilmLogging();
+        }
         private SqlConnection con;
-        // Get the mapper
         private FilmMapper mapper;
 
         public SqlConnection connection()
@@ -32,16 +35,22 @@ namespace Mosquito.CinemaTask.Repositories
 
             using (var con = connection())
             {
-                const string query = "SELECT Id, Film, Rating, Duration FROM Films;";
-
-                using (SqlCommand cmd = new SqlCommand(query, con))
+                try
                 {
-                    con.Open();
-
-                    SqlDataReader result = cmd.ExecuteReader();
-
-                    model = mapper.MapSelect(result);
+                    const string query = "SELECT Id, Film, Rating, Duration FROM Films;";
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        con.Open();
+                        SqlDataReader result = cmd.ExecuteReader();
+                        model = mapper.MapSelect(result);
+                    }
                 }
+
+                catch (Exception ex)
+                {
+
+                }
+
             }
             return model;
         }
