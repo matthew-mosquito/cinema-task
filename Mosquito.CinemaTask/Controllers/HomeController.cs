@@ -1,10 +1,6 @@
 ﻿using Mosquito.CinemaTask.Models;
 using Mosquito.CinemaTask.Services;
 using Mosquito.CinemaTask.Services.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Mosquito.CinemaTask.Controllers
@@ -39,51 +35,36 @@ namespace Mosquito.CinemaTask.Controllers
         public ActionResult Create(FilmModel model)
         {
             if (ModelState.IsValid)
-            {
                 _filmServices.AddFilm(model);
-            }
 
             return RedirectToAction("Index");
         }
 
         // GET: Default/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int Id)
         {
             return View();
         }
 
         // POST: Default/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(FilmModel model)
         {
-            try
-            {
-                // TODO: Add update logic here
+            // TODO: Add update logic here
+            if (ModelState.IsValid)
+                _filmServices.EditFilm(model);
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            return RedirectToAction("Index");
         }
 
         // POST: Default/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int Id)
         {
-            return View("Index");
-            /*
-            try
-            {
-                // TODO: Add delete logic here
+            // Using the Id, we need to delete the field
 
-                return View("Index");
-            }
-            catch
-            {
-                return View("Index");
-            }
-            */
+            _filmServices.DeleteFilm(Id);
+
+            return RedirectToAction("Index");
         }
     }
 }

@@ -19,7 +19,7 @@ namespace Mosquito.CinemaTask.Services.Interfaces
         bool EditFilm(FilmModel model);
 
         // Delete a film
-        bool DeleteFilm(FilmModel model);
+        bool DeleteFilm(int Id);
 
     }
 }

@@ -1,12 +1,10 @@
 ﻿using Mosquito.CinemaTask.Models;
 using Mosquito.CinemaTask.Repositories.Interfaces;
 using Mosquito.CinemaTask.Mapper;
-using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
+
 
 namespace Mosquito.CinemaTask.Repositories
 {
@@ -50,7 +48,23 @@ namespace Mosquito.CinemaTask.Repositories
 
         public bool Delete(int Id)
         {
-            throw new NotImplementedException();
+            using (var con = connection())
+            {
+                const string query = "DELETE FROM Films WHERE Id=@Id";
+
+                using (SqlCommand cmd = new SqlCommand(query, con))
+                {
+                    con.Open();
+
+                    cmd.Parameters.AddWithValue("@Id", Id);
+
+                    int rowsDeleted = cmd.ExecuteNonQuery();
+
+                    if (rowsDeleted > 0)
+                        return true;
+                }
+            }
+            return true;
         }
 
         public bool Save(FilmModel model)
@@ -77,7 +91,22 @@ namespace Mosquito.CinemaTask.Repositories
 
         public bool Update(FilmModel model)
         {
-            throw new NotImplementedException();
+            using (var con = connection())
+            {
+                const string query = "UPDATE Films SET Film=@Film, Rating=@Rating, Duration=@Duration WHERE Id=@Id";
+                // Create command using query and connection
+                SqlCommand cmd = new SqlCommand(query, con);
+                // Open the connection
+                con.Open();
+                // Map the parameters
+                cmd = mapper.MapEdit(cmd, model);
+
+                var rowsEdited = cmd.ExecuteNonQuery();
+
+                if (rowsEdited > 0)
+                    return true;
+            }
+            return false;
         }
     }
 }

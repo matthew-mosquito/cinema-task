@@ -20,6 +20,7 @@ namespace Mosquito.CinemaTask.Models
 
         [Required]
         [Range(0.1, 6)]
+        [Display(Name="Duration (hours)")]
         public double Duration { get; set; }
     }
 }

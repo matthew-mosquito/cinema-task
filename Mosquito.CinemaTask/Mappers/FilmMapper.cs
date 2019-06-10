@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
 
 namespace Mosquito.CinemaTask.Mapper
 {
@@ -20,6 +18,7 @@ namespace Mosquito.CinemaTask.Mapper
                 FilmModel film = new FilmModel();
 
                 // Assign the properties from the table columns
+                film.Id = Convert.ToInt32(reader["Id"]);
                 film.Name = reader["Film"].ToString();
                 film.Rating = Convert.ToInt32(reader["Rating"]);
                 film.Duration = Convert.ToDouble(reader["Duration"]);
@@ -31,7 +30,7 @@ namespace Mosquito.CinemaTask.Mapper
             return modelList;
         }
 
-        public SqlCommand MapAdd(SqlCommand cmd, FilmModel model)
+        internal SqlCommand MapAdd(SqlCommand cmd, FilmModel model)
         {
             cmd.Parameters.AddWithValue("@Film", model.Name);
             cmd.Parameters.AddWithValue("@Rating", model.Rating);
@@ -39,5 +38,16 @@ namespace Mosquito.CinemaTask.Mapper
 
             return cmd;
         }
+
+        internal SqlCommand MapEdit(SqlCommand cmd, FilmModel model)
+        {
+            cmd.Parameters.AddWithValue("@Id", model.Id);
+            cmd.Parameters.AddWithValue("@Film", model.Name);
+            cmd.Parameters.AddWithValue("@Rating", model.Rating);
+            cmd.Parameters.AddWithValue("@Duration", model.Duration);
+
+            return cmd;
+        }
+
     }
 }

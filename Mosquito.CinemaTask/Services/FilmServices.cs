@@ -2,11 +2,8 @@
 using Mosquito.CinemaTask.Repositories;
 using Mosquito.CinemaTask.Repositories.Interfaces;
 using Mosquito.CinemaTask.Services.Interfaces;
-using System;
+
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
 
 namespace Mosquito.CinemaTask.Services
 {
@@ -28,19 +25,23 @@ namespace Mosquito.CinemaTask.Services
 
         public bool AddFilm(FilmModel model)
         {
-            var rows_added = _filmRepository.Save(model);
+            var rowsAdded = _filmRepository.Save(model);
 
-            return rows_added;
+            return rowsAdded;
         }
 
         public bool EditFilm(FilmModel model)
         {
-            throw new NotImplementedException();
+            var rowsEdited = _filmRepository.Update(model);
+
+            return rowsEdited;
         }
 
-        public bool DeleteFilm(FilmModel model)
+        public bool DeleteFilm(int Id)
         {
-            throw new NotImplementedException();
+            var rowsDeleted = _filmRepository.Delete(Id);
+
+            return true;
         }
     }
 }
