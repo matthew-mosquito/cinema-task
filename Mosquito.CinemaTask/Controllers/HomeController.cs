@@ -36,18 +36,14 @@ namespace Mosquito.CinemaTask.Controllers
 
         // POST: Default/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(FilmModel model)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add insert logic here
+                _filmServices.AddFilm(model);
+            }
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            return RedirectToAction("Index");
         }
 
         // GET: Default/Edit/5
@@ -73,19 +69,21 @@ namespace Mosquito.CinemaTask.Controllers
         }
 
         // POST: Default/Delete/5
-        [HttpPost]
         public ActionResult Delete(int id)
         {
+            return View("Index");
+            /*
             try
             {
                 // TODO: Add delete logic here
 
-                return RedirectToAction("Index");
+                return View("Index");
             }
             catch
             {
-                return View();
+                return View("Index");
             }
+            */
         }
     }
 }
