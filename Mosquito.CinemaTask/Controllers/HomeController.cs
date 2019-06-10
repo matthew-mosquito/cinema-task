@@ -1,4 +1,6 @@
 ﻿using Mosquito.CinemaTask.Models;
+using Mosquito.CinemaTask.Services;
+using Mosquito.CinemaTask.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,11 +12,20 @@ namespace Mosquito.CinemaTask.Controllers
     public class HomeController : Controller
     {
 
+        private readonly IFilmService _filmServices;
+
+        public HomeController()
+        {
+            _filmServices = new FilmServices();
+        }
+
         // GET: Default
         public ActionResult Index()
         {
             // return list
-            return View();
+            var model = _filmServices.GetAllFilms();
+
+            return View(model);
         }
 
         // GET: Default/Create

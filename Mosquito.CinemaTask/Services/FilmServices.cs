@@ -1,4 +1,6 @@
 ﻿using Mosquito.CinemaTask.Models;
+using Mosquito.CinemaTask.Repositories;
+using Mosquito.CinemaTask.Repositories.Interfaces;
 using Mosquito.CinemaTask.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -9,12 +11,21 @@ namespace Mosquito.CinemaTask.Services
 {
     public class FilmServices : IFilmService
     {
-        public bool AddFilm(FilmModel model)
+        private readonly IFilmRepository _filmRepository;
+
+        public FilmServices()
         {
-            throw new NotImplementedException();
+            _filmRepository = new FilmRepository();
         }
 
-        public bool DeleteFilm(FilmModel model)
+        public IEnumerable<FilmModel> GetAllFilms()
+        {
+            var allFilms = _filmRepository.AllFilms();
+
+            return allFilms;
+        }
+
+        public bool AddFilm(FilmModel model)
         {
             throw new NotImplementedException();
         }
@@ -24,7 +35,7 @@ namespace Mosquito.CinemaTask.Services
             throw new NotImplementedException();
         }
 
-        public IEnumerable<FilmModel> GetAllCalls()
+        public bool DeleteFilm(FilmModel model)
         {
             throw new NotImplementedException();
         }
