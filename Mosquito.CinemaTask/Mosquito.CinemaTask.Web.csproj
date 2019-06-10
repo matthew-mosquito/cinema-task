@@ -131,9 +131,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Mappers\FilmMapper.cs" />
     <Compile Include="Models\FilmModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\FilmRepository.cs" />
     <Compile Include="Repositories\Interfaces\IFilmRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IDatabase.cs" />
+    <Compile Include="Services\FilmServices.cs" />
     <Compile Include="Services\Interfaces\IFilmService.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -32,6 +32,11 @@ namespace Mosquito.CinemaTask.Services
 
         public bool EditFilm(FilmModel model)
         {
+
+            // Check if ModelState.IsValid
+
+            if (ModelState.IsValid)
+
             throw new NotImplementedException();
         }
 

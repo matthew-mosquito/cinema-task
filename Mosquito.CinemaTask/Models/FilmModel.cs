@@ -16,10 +16,10 @@ namespace Mosquito.CinemaTask.Models
 
         [Required]
         [Range(0, 10)]
-        public int Rating { get; set; }
+        public double Rating { get; set; }
 
         [Required]
         [Range(0.1, 6)]
-        public float Duration { get; set; }
+        public double Duration { get; set; }
     }
 }

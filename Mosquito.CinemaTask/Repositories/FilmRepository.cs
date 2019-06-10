@@ -1,5 +1,6 @@
 ﻿using Mosquito.CinemaTask.Models;
 using Mosquito.CinemaTask.Repositories.Interfaces;
+using Mosquito.CinemaTask.Mapper;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -14,8 +15,14 @@ namespace Mosquito.CinemaTask.Repositories
 
         // Get the SQL Connection
         private SqlConnection con;
+        // Get the mapper
+        private FilmMapper mapper;
+
         public SqlConnection connection()
         {
+            // Instantiate mapping
+            mapper = new FilmMapper();
+
             string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString();
             con = new SqlConnection(connectionString);
 
@@ -23,6 +30,7 @@ namespace Mosquito.CinemaTask.Repositories
         }
         public IEnumerable<FilmModel> AllFilms()
         {
+            IEnumerable<FilmModel> model;
 
             using (var con = connection())
             {
@@ -31,11 +39,13 @@ namespace Mosquito.CinemaTask.Repositories
                 using (SqlCommand cmd = new SqlCommand(query, con))
                 {
                     con.Open();
-                    var result = (IEnumerable<FilmModel>)cmd.ExecuteReader();
 
-                    return result;
+                    SqlDataReader result = cmd.ExecuteReader();
+
+                    model = mapper.MapSelect(result);
                 }
             }
+            return model;
         }
 
         public bool Delete(int Id)
