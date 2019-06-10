@@ -34,7 +34,7 @@ namespace Mosquito.CinemaTask.Repositories
 
             using (var con = connection())
             {
-                const string query = "SELECT Id, FilmName, Rating, Duration FROM Films;";
+                const string query = "SELECT Id, Film, Rating, Duration FROM Films;";
 
                 using (SqlCommand cmd = new SqlCommand(query, con))
                 {
@@ -55,7 +55,24 @@ namespace Mosquito.CinemaTask.Repositories
 
         public bool Save(FilmModel model)
         {
-            throw new NotImplementedException();
+            using (var con = connection())
+            {
+
+                // Sql String
+                const string query = "INSERT INTO Films (Film, Rating, Duration) VALUES (@Film, @Rating, @Duration)";
+                // Create command using query and connection
+                SqlCommand cmd = new SqlCommand(query, con);
+                // Open the connection
+                con.Open();
+                //  Map  the parameters in the query to the model
+                cmd = mapper.MapAdd(cmd, model);
+
+                var rowsAffected = cmd.ExecuteNonQuery();
+
+                if (rowsAffected > 0)
+                    return true;
+            }
+            return false;
         }
 
         public bool Update(FilmModel model)

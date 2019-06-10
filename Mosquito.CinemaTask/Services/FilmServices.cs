@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace Mosquito.CinemaTask.Services
 {
@@ -27,16 +28,13 @@ namespace Mosquito.CinemaTask.Services
 
         public bool AddFilm(FilmModel model)
         {
-            throw new NotImplementedException();
+            var rows_added = _filmRepository.Save(model);
+
+            return rows_added;
         }
 
         public bool EditFilm(FilmModel model)
         {
-
-            // Check if ModelState.IsValid
-
-            if (ModelState.IsValid)
-
             throw new NotImplementedException();
         }
 

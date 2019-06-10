@@ -38,18 +38,12 @@ namespace Mosquito.CinemaTask.Controllers
         [HttpPost]
         public ActionResult Create(FilmModel model)
         {
-            try
+            if (ModelState.IsValid)
             {
-                //Invoke add film service
                 _filmServices.AddFilm(model);
-                
+            }
 
-                return View("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            return RedirectToAction("Index");
         }
 
         // GET: Default/Edit/5
