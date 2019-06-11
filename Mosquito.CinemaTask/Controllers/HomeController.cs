@@ -73,11 +73,20 @@ namespace Mosquito.CinemaTask.Controllers
             return View("Edit", model);
         }
 
+        [HttpGet]
         public ActionResult Delete(int Id)
         {
             SuccessType success = _filmServices.DeleteFilm(Id);
 
             return RedirectToAction("Index", new {type = success });
+        }
+
+        [HttpPost]
+        public ActionResult Delete(int[] Ids)
+        {
+            var testing = Ids;
+
+            return RedirectToAction("Index");
         }
     }
 }
