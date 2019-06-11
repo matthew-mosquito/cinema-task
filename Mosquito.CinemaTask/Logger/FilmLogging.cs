@@ -4,7 +4,7 @@ namespace Mosquito.CinemaTask.Logger
 {
     public class FilmLogging : ILogger
     {
-        string path = "~/Logger/log.txt";
+        string path = "C:/Users/Matthew Winterbottom/source/repos/cinema-task/Mosquito.CinemaTask/Logger/log.txt";
         public FilmLogging()
         {
             if (!File.Exists(path))
