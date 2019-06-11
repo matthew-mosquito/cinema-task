@@ -2,6 +2,8 @@
 using Mosquito.CinemaTask.Services;
 using Mosquito.CinemaTask.Services.Interfaces;
 using System.Web.Mvc;
+using System;
+using System.Collections.Generic;
 
 namespace Mosquito.CinemaTask.Controllers
 {
@@ -15,9 +17,11 @@ namespace Mosquito.CinemaTask.Controllers
             _filmServices = new FilmServices();
         }
 
-        public ActionResult Index(SuccessType type = SuccessType.None)
+        public ActionResult Index(string sortOrder, SuccessType type = SuccessType.None)
         {
-            var model = _filmServices.GetAllFilms();
+            IEnumerable<FilmModel> model;
+
+            model = _filmServices.GetAllFilms(sortOrder);
 
             if (type == SuccessType.Create)
                 ViewBag.Action = "Create";

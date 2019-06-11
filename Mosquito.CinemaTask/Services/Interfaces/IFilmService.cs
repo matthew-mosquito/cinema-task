@@ -10,7 +10,7 @@ namespace Mosquito.CinemaTask.Services.Interfaces
     interface IFilmService
     {
         // Get films
-        IEnumerable<FilmModel> GetAllFilms();
+        IEnumerable<FilmModel> GetAllFilms(string sortOrder);
 
         // Add a film
         SuccessType AddFilm(FilmModel model);

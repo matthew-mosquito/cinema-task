@@ -31,4 +31,16 @@
     }
 }
 
+
+@Html.DropDownList(
+    "url",
+    new SelectList(new[]
+    {
+        new SelectListItem { Text = "Ascending", Value = Url.Action("Index/Ascending", "Home") },
+        new SelectListItem { Text = "Descending", Value = Url.Action("Index/Descending", "Home") },
+    }, "Value", "Text"),
+    "Sort by",
+    new { id = "sort" }
+)
+
 @Html.Partial("~/Views/Partials/List.cshtml")

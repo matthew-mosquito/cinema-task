@@ -15,8 +15,8 @@ namespace Mosquito.CinemaTask
 
             routes.MapRoute(
                 name: "Default",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                url: "{controller}/{action}/{sortOrder}",
+                defaults: new { controller = "Home", action = "Index", sortOrder = UrlParameter.Optional }
             );
         }
     }

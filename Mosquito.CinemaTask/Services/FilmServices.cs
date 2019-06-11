@@ -2,7 +2,7 @@
 using Mosquito.CinemaTask.Repositories;
 using Mosquito.CinemaTask.Repositories.Interfaces;
 using Mosquito.CinemaTask.Services.Interfaces;
-
+using System.Linq;
 using System.Collections.Generic;
 
 namespace Mosquito.CinemaTask.Services
@@ -16,9 +16,26 @@ namespace Mosquito.CinemaTask.Services
             _filmRepository = new FilmRepository();
         }
 
-        public IEnumerable<FilmModel> GetAllFilms()
+        public IEnumerable<FilmModel> GetAllFilms(string sortOrder = "none")
         {
-            var allFilms = _filmRepository.AllFilms();
+            IEnumerable<FilmModel> allFilms;
+
+            if (sortOrder == "Ascending")
+            {
+                allFilms = from film in _filmRepository.AllFilms()
+                           orderby film.Name ascending
+                           select film;
+            }
+
+            else if (sortOrder == "Descending")
+            {
+                allFilms = from film in _filmRepository.AllFilms()
+                           orderby film.Name descending
+                           select film;
+            }
+
+            else
+                allFilms = _filmRepository.AllFilms();
 
             return allFilms;
         }
