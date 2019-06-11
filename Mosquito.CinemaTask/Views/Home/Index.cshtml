@@ -36,7 +36,7 @@
             @Html.DisplayFor(modelItem => item.Duration)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Edit", "Edit", item) |
             @Html.ActionLink("Delete", "Delete", new { id = item.Id })
         </td>
     </tr>

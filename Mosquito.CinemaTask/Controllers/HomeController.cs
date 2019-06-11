@@ -41,14 +41,16 @@ namespace Mosquito.CinemaTask.Controllers
         }
 
         // GET: Default/Edit/5
-        public ActionResult Edit(int Id)
+        [HttpGet]
+        public ActionResult Edit(FilmModel model)
         {
-            return View();
+            return View(model);
         }
 
         // POST: Default/Edit/5
         [HttpPost]
-        public ActionResult Edit(FilmModel model)
+        [ActionName("Edit")]
+        public ActionResult EditPost(FilmModel model)
         {
             // TODO: Add update logic here
             if (ModelState.IsValid)
