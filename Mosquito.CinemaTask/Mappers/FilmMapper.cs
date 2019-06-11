@@ -8,7 +8,7 @@ namespace Mosquito.CinemaTask.Mapper
     public class FilmMapper
     {
 
-        public IEnumerable<FilmModel> MapSelect(SqlDataReader reader)
+        public IEnumerable<FilmModel> MapSelectResults(SqlDataReader reader)
         {
             var modelList = new List<FilmModel>();
 

@@ -11,7 +11,6 @@ namespace Mosquito.CinemaTask.Logger
             {
                 File.Create(path);
             }
-
         }
 
         public void WriteLine(string log)

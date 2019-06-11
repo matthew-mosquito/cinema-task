@@ -12,9 +12,10 @@ namespace Mosquito.CinemaTask.Repositories
 {
     public class FilmRepository : IFilmRepository, IDatabase
     {
+        FilmLogging logger;
         public FilmRepository()
         {
-            FilmLogging logger = new FilmLogging();
+            logger = new FilmLogging();
         }
         private SqlConnection con;
         private FilmMapper mapper;
@@ -42,17 +43,18 @@ namespace Mosquito.CinemaTask.Repositories
                     {
                         con.Open();
                         SqlDataReader result = cmd.ExecuteReader();
-                        model = mapper.MapSelect(result);
+                        model = mapper.MapSelectResults(result);
+                        return model;
+
                     }
                 }
-
                 catch (Exception ex)
                 {
-
+                    logger.WriteLine($"Error retrieving list of all films {ex.Message}");
                 }
-
             }
-            return model;
+
+            return null;
         }
 
         public bool Delete(int Id)

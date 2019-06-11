@@ -131,6 +131,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Logger\Interfaces\ILogger.cs" />
+    <Compile Include="Logger\FilmLogging.cs" />
     <Compile Include="Mappers\FilmMapper.cs" />
     <Compile Include="Models\FilmModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
