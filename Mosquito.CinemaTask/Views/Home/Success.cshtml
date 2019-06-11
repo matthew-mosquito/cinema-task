@@ -1,0 +1,12 @@
+﻿@model IEnumerable<Mosquito.CinemaTask.Models.FilmModel>
+
+@{
+    ViewBag.Title = "Success";
+}
+
+<div class="alert alert-success" style="margin-top: 2%;">
+    <strong>Success!</strong> Film added.
+</div>
+
+@* Render list of films *@
+@Html.Partial("~/Views/Partials/List.cshtml")
