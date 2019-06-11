@@ -16,10 +16,13 @@ namespace Mosquito.CinemaTask.Controllers
         }
 
         // GET: Default
-        public ActionResult Index()
+        public ActionResult Index(bool successfulPost = false)
         {
             // return list
             var model = _filmServices.GetAllFilms();
+
+            if (successfulPost)
+                return View("Success", model);
 
             return View(model);
         }
@@ -34,10 +37,12 @@ namespace Mosquito.CinemaTask.Controllers
         [HttpPost]
         public ActionResult Create(FilmModel model)
         {
-            if (ModelState.IsValid)
-                _filmServices.AddFilm(model);
+            bool success = false;
 
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+                success = _filmServices.AddFilm(model);
+
+            return RedirectToAction("Index", new { successfulPost = success });
         }
 
         // GET: Default/Edit/5
