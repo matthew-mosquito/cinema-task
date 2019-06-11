@@ -23,25 +23,25 @@ namespace Mosquito.CinemaTask.Services
             return allFilms;
         }
 
-        public bool AddFilm(FilmModel model)
+        public SuccessType AddFilm(FilmModel model)
         {
-            var rowsAdded = _filmRepository.Save(model);
+            SuccessType rowsAdded = _filmRepository.Save(model);
 
             return rowsAdded;
         }
 
-        public bool EditFilm(FilmModel model)
+        public SuccessType EditFilm(FilmModel model)
         {
-            var rowsEdited = _filmRepository.Update(model);
+            SuccessType rowsEdited = _filmRepository.Update(model);
 
             return rowsEdited;
         }
 
-        public bool DeleteFilm(int Id)
+        public SuccessType DeleteFilm(int Id)
         {
-            var rowsDeleted = _filmRepository.Delete(Id);
+            SuccessType rowsDeleted = _filmRepository.Delete(Id);
 
-            return true;
+            return rowsDeleted;
         }
     }
 }

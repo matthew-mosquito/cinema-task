@@ -10,13 +10,13 @@ namespace Mosquito.CinemaTask.Repositories.Interfaces
     interface IFilmRepository
     {
         // Save film
-        bool Save(FilmModel model);
+        SuccessType Save(FilmModel model);
 
         // Update film
-        bool Update(FilmModel model);
+        SuccessType Update(FilmModel model);
 
         // Delete film
-        bool Delete(int Id);
+        SuccessType Delete(int Id);
 
         // Get films
         IEnumerable<FilmModel> AllFilms();

@@ -13,13 +13,13 @@ namespace Mosquito.CinemaTask.Services.Interfaces
         IEnumerable<FilmModel> GetAllFilms();
 
         // Add a film
-        bool AddFilm(FilmModel model);
+        SuccessType AddFilm(FilmModel model);
 
         // Edit a Film
-        bool EditFilm(FilmModel model);
+        SuccessType EditFilm(FilmModel model);
 
         // Delete a film
-        bool DeleteFilm(int Id);
+        SuccessType DeleteFilm(int Id);
 
     }
 }

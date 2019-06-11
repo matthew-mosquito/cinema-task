@@ -6,4 +6,29 @@
 
 <h2>Films</h2>
 
+@{
+    if (ViewBag.Action != null)
+    {
+        if (ViewBag.Action == "Create")
+        {
+            <div class="alert alert-success mt-2">
+                <strong>Success!</strong> Film added.
+            </div>
+        }
+        else if (ViewBag.Action == "Delete")
+        {
+            <div class="alert alert-success mt-2">
+                <strong>Success!</strong> Film deleted.
+            </div>
+        }
+
+        else if (ViewBag.Action == "Failed")
+        {
+            <div class="alert alert-danger mt-2">
+                <strong>Failed!</strong> Film failed to delete.
+            </div>
+        }
+    }
+}
+
 @Html.Partial("~/Views/Partials/List.cshtml")

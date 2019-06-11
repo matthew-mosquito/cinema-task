@@ -53,7 +53,7 @@ namespace Mosquito.CinemaTask.Repositories
             return null;
         }
 
-        public bool Delete(int Id)
+        public SuccessType Delete(int Id)
         {
             using (var con = connection())
             {
@@ -67,7 +67,7 @@ namespace Mosquito.CinemaTask.Repositories
                         cmd.Parameters.AddWithValue("@Id", Id);
                         int rowsDeleted = cmd.ExecuteNonQuery();
                         if (rowsDeleted > 0)
-                            return true;
+                            return SuccessType.Delete;
                     }
                     catch (Exception ex)
                     {
@@ -75,10 +75,10 @@ namespace Mosquito.CinemaTask.Repositories
                     }
                 }
             }
-            return false;
+            return SuccessType.Failed;
         }
 
-        public bool Save(FilmModel model)
+        public SuccessType Save(FilmModel model)
         {
             using (var con = connection())
             {
@@ -90,7 +90,7 @@ namespace Mosquito.CinemaTask.Repositories
                     cmd = mapper.MapAdd(cmd, model);
                     var rowsAffected = cmd.ExecuteNonQuery();
                     if (rowsAffected > 0)
-                        return true;
+                        return SuccessType.Create;
                 }
                 catch ( Exception ex )
                 {
@@ -98,10 +98,10 @@ namespace Mosquito.CinemaTask.Repositories
                 }
 
             }
-            return false;
+            return SuccessType.Failed;
         }
 
-        public bool Update(FilmModel model)
+        public SuccessType Update(FilmModel model)
         {
             using (var con = connection())
             {
@@ -113,14 +113,14 @@ namespace Mosquito.CinemaTask.Repositories
                     cmd = mapper.MapEdit(cmd, model);
                     var rowsEdited = cmd.ExecuteNonQuery();
                     if (rowsEdited > 0)
-                        return true;
+                        return SuccessType.Edit;
                 }
                 catch ( Exception ex )
                 {
                     logger.WriteLine($"Error editing film information {ex.Message}");
                 }
             }
-            return false;
+            return SuccessType.Failed;
         }
     }
 }

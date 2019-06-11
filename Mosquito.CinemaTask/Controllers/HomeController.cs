@@ -15,63 +15,65 @@ namespace Mosquito.CinemaTask.Controllers
             _filmServices = new FilmServices();
         }
 
-        // GET: Default
-        public ActionResult Index(bool successfulPost = false)
+        public ActionResult Index(SuccessType type = SuccessType.None)
         {
-            // return list
             var model = _filmServices.GetAllFilms();
 
-            if (successfulPost)
-                return View("Success", model);
+            if (type == SuccessType.Create)
+                ViewBag.Action = "Create";
+
+            else if (type == SuccessType.Delete)
+                ViewBag.Action = "Delete";
 
             return View(model);
         }
 
-        // GET: Default/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Default/Create
+
         [HttpPost]
         public ActionResult Create(FilmModel model)
         {
-            bool success = false;
+            SuccessType success = SuccessType.None;
 
             if (ModelState.IsValid)
                 success = _filmServices.AddFilm(model);
 
-            return RedirectToAction("Index", new { successfulPost = success });
+            return RedirectToAction("Index", new { type = success });
         }
 
-        // GET: Default/Edit/5
         [HttpGet]
         public ActionResult Edit(FilmModel model)
         {
             return View(model);
         }
 
-        // POST: Default/Edit/5
+
         [HttpPost]
         [ActionName("Edit")]
         public ActionResult EditPost(FilmModel model)
         {
-            // TODO: Add update logic here
-            if (ModelState.IsValid)
-                _filmServices.EditFilm(model);
+            SuccessType success = SuccessType.None;
 
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+                success = _filmServices.EditFilm(model);
+
+            if (success == SuccessType.Edit)
+                ViewBag.Success = true;
+            else if (success == SuccessType.Failed)
+                ViewBag.Success = false;
+
+            return View("Edit", model);
         }
 
-        // POST: Default/Delete/5
         public ActionResult Delete(int Id)
         {
-            // Using the Id, we need to delete the field
+            SuccessType success = _filmServices.DeleteFilm(Id);
 
-            _filmServices.DeleteFilm(Id);
-
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new {type = success });
         }
     }
 }
