@@ -18,11 +18,11 @@ namespace Mosquito.CinemaTask.Controllers
             _filmServices = new FilmServices();
         }
 
-        public ActionResult Index(string id, SuccessType type = SuccessType.None)
+        public ActionResult Index(string sortOrder, SuccessType type = SuccessType.None)
         {
             IEnumerable<FilmModel> model;
 
-            model = _filmServices.GetAllFilms(id);
+            model = _filmServices.GetAllFilms(sortOrder);
 
             switch (type)
             {
@@ -100,7 +100,7 @@ namespace Mosquito.CinemaTask.Controllers
         {
             SuccessType success = _filmServices.DeleteFilm(Id);
 
-            return RedirectToAction("Index", new {type = success });
+            return RedirectToAction("Index", new { type = success });
         }
 
         [HttpPost]

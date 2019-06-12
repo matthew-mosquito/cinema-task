@@ -14,9 +14,10 @@ namespace Mosquito.CinemaTask
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                name: "Edit",
+                name: "Default2",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
+                constraints: new { id = @"\d+"}
             );
 
             routes.MapRoute(
