@@ -56,9 +56,9 @@ namespace Mosquito.CinemaTask.Services
 
         public SuccessType DeleteFilm(int Id)
         {
-            SuccessType rowsDeleted = _filmRepository.Delete(Id);
+            SuccessType deleteSuccess = _filmRepository.Delete(Id);
 
-            return rowsDeleted;
+            return deleteSuccess;
         }
     }
 }

@@ -6,30 +6,9 @@
 
 <h2>Films</h2>
 
-@{
-    if (ViewBag.Action != null)
-    {
-        if (ViewBag.Action == "Create")
-        {
-            <div class="alert alert-success mt-2">
-                <strong>Success!</strong> Film added.
-            </div>
-        }
-        else if (ViewBag.Action == "Delete")
-        {
-            <div class="alert alert-success mt-2">
-                <strong>Success!</strong> Film deleted.
-            </div>
-        }
-
-        else if (ViewBag.Action == "Failed")
-        {
-            <div class="alert alert-danger mt-2">
-                <strong>Failed!</strong> Film failed to delete.
-            </div>
-        }
-    }
-}
+<div class="alert @ViewBag.Class mt-2">
+    <strong>@ViewBag.Message</strong>
+</div>
 
 
 @Html.DropDownList(
@@ -40,7 +19,7 @@
         new SelectListItem { Text = "Descending", Value = Url.Action("Index/Descending", "Home") },
     }, "Value", "Text"),
     "Sort by",
-    new { id = "sort" }
+    new { id = "sort", @class = "form-control mb-2"}
 )
 
 @Html.Partial("~/Views/Partials/List.cshtml")
