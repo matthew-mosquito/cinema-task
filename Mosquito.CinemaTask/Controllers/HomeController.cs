@@ -4,6 +4,7 @@ using Mosquito.CinemaTask.Services.Interfaces;
 using System.Web.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Mosquito.CinemaTask.Controllers
 {
@@ -23,11 +24,23 @@ namespace Mosquito.CinemaTask.Controllers
 
             model = _filmServices.GetAllFilms(sortOrder);
 
-            if (type == SuccessType.Create)
-                ViewBag.Action = "Create";
-
-            else if (type == SuccessType.Delete)
-                ViewBag.Action = "Delete";
+            switch (type)
+            {
+                case SuccessType.Failed:
+                    ViewBag.Message = "Sorry, that didn't work!";
+                    ViewBag.Class = "alert-danger";
+                    break;
+                case SuccessType.Create:
+                    ViewBag.Message = "Created new Entry!";
+                    ViewBag.Class = "alert-success";
+                    break;
+                case SuccessType.Delete:
+                    ViewBag.Message = "Successfully Deleted!";
+                    ViewBag.Class = "alert-success";
+                    break;
+                default:
+                    break;
+            }
 
             return View(model);
         }
@@ -36,7 +49,6 @@ namespace Mosquito.CinemaTask.Controllers
         {
             return View();
         }
-
 
         [HttpPost]
         public ActionResult Create(FilmModel model)
@@ -82,11 +94,21 @@ namespace Mosquito.CinemaTask.Controllers
         }
 
         [HttpPost]
-        public ActionResult Delete(int[] Ids)
+        public ActionResult Delete(IEnumerable<int> Id)
         {
-            var testing = Ids;
 
-            return RedirectToAction("Index");
+            if (Id != null)
+            {
+                List<SuccessType> success = new List<SuccessType>();
+
+                foreach (int id in Id)
+                    success.Add(_filmServices.DeleteFilm(id));
+
+                if (!success.Contains(SuccessType.Failed))
+                    return RedirectToAction("Index", new { type = SuccessType.Delete });
+            }
+
+            return RedirectToAction("Index", new { type = SuccessType.Failed });
         }
     }
 }

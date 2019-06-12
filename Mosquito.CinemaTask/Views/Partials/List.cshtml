@@ -7,12 +7,12 @@
 @using (Html.BeginForm("Delete", "Home", FormMethod.Post))
 {
 
-    <div class="btn-group">
-        <input type="submit" value="Delete" />
-    </div>
 
     <table class="table">
         <tr>
+            <th>
+
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
@@ -29,7 +29,7 @@
         {
             <tr>
                 <td>
-                    <input type="checkbox" name="ID" value="@item.Id" class="checkboxes" />
+                    <input type="checkbox" name="Id" id="Id" value="@item.Id" />
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Name)
@@ -41,10 +41,12 @@
                     @Html.DisplayFor(modelItem => item.Duration)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", item) |
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
                     @Html.ActionLink("Delete", "Delete", new { id = item.Id })
                 </td>
             </tr>
         }
     </table>
+
+    <input class="btn btn-danger mb-2" type="submit" value="Delete" />
 }
