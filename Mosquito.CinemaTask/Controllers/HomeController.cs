@@ -18,11 +18,11 @@ namespace Mosquito.CinemaTask.Controllers
             _filmServices = new FilmServices();
         }
 
-        public ActionResult Index(string sortOrder, SuccessType type = SuccessType.None)
+        public ActionResult Index(string id, SuccessType type = SuccessType.None)
         {
             IEnumerable<FilmModel> model;
 
-            model = _filmServices.GetAllFilms(sortOrder);
+            model = _filmServices.GetAllFilms(id);
 
             switch (type)
             {
@@ -62,8 +62,10 @@ namespace Mosquito.CinemaTask.Controllers
         }
 
         [HttpGet]
-        public ActionResult Edit(FilmModel model)
+        public ActionResult Edit(int id = 0)
         {
+            FilmModel model = _filmServices.getEditModel(id);
+          
             return View(model);
         }
 
@@ -77,11 +79,19 @@ namespace Mosquito.CinemaTask.Controllers
             if (ModelState.IsValid)
                 success = _filmServices.EditFilm(model);
 
-            if (success == SuccessType.Edit)
-                ViewBag.Success = true;
-            else if (success == SuccessType.Failed)
-                ViewBag.Success = false;
-
+            switch (success)
+            {
+                case SuccessType.Edit:
+                    ViewBag.Message = "Update successful!";
+                    ViewBag.Class = "alert-success";
+                    break;
+                case SuccessType.Failed:
+                    ViewBag.Message = "Change failed!";
+                    ViewBag.Class = "alert-danger";
+                    break;
+                default:
+                    break;
+            }
             return View("Edit", model);
         }
 

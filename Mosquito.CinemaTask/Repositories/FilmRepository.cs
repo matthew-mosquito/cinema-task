@@ -122,5 +122,30 @@ namespace Mosquito.CinemaTask.Repositories
             }
             return SuccessType.Failed;
         }
+
+        public FilmModel getFilmByID(int id)
+        {
+            using (var con = connection())
+            {
+                try
+                {
+                    const string query = "SELECT Id, Film, Rating, Duration FROM Films WHERE Id=@Id";
+                    SqlCommand cmd = new SqlCommand(query, con);
+                    con.Open();
+                    cmd.Parameters.AddWithValue("@Id", id);
+                    SqlDataReader result = cmd.ExecuteReader();
+                    FilmModel model = mapper.MapSelectedResult(result);
+
+                    return model;
+                }
+                catch (Exception ex)
+                {
+                    logger.WriteLine($"Error editing film information {ex.Message}");
+                }
+            }
+
+            FilmModel x = new FilmModel();
+            return x;
+        }
     }
 }

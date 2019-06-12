@@ -20,6 +20,6 @@ namespace Mosquito.CinemaTask.Services.Interfaces
 
         // Delete a film
         SuccessType DeleteFilm(int Id);
-
+        FilmModel getEditModel(int id);
     }
 }

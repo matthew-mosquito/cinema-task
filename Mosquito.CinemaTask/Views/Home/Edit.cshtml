@@ -5,23 +5,10 @@
 }
 
 <h2>Edit</h2>
-@{
-    if (ViewBag.Success != null)
-    {
-        if (ViewBag.Success)
-        {
-            <div class="alert alert-success mt-2">
-                <strong>Success!</strong> Film Updated.
-            </div>
-        }
-        else
-        {
-            <div class="alert alert-danger mt-2">
-                <strong>Failed!</strong> Film update failed.
-            </div>
-        }
-    }
-}
+
+<div class="alert @ViewBag.Class mt-2">
+    <strong>@ViewBag.Message</strong>
+</div>
 
 @using (Html.BeginForm())
 {

@@ -30,6 +30,23 @@ namespace Mosquito.CinemaTask.Mapper
             return modelList;
         }
 
+        public FilmModel MapSelectedResult(SqlDataReader reader)
+        {
+            FilmModel film = new FilmModel();
+
+            while (reader.Read())
+            {
+                // Assign the properties from the table columns
+                film.Id = Convert.ToInt32(reader["Id"]);
+                film.Name = reader["Film"].ToString();
+                film.Rating = Convert.ToInt32(reader["Rating"]);
+                film.Duration = Convert.ToDouble(reader["Duration"]);
+            }
+
+            return film;
+
+        }
+
         internal SqlCommand MapAdd(SqlCommand cmd, FilmModel model)
         {
             cmd.Parameters.AddWithValue("@Film", model.Name);

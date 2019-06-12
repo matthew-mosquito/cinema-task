@@ -20,5 +20,6 @@ namespace Mosquito.CinemaTask.Repositories.Interfaces
 
         // Get films
         IEnumerable<FilmModel> AllFilms();
+        FilmModel getFilmByID(int id);
     }
 }

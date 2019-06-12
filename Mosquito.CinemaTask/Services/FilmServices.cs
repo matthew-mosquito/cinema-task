@@ -49,9 +49,9 @@ namespace Mosquito.CinemaTask.Services
 
         public SuccessType EditFilm(FilmModel model)
         {
-            SuccessType rowsEdited = _filmRepository.Update(model);
+            SuccessType success = _filmRepository.Update(model);
 
-            return rowsEdited;
+            return success;
         }
 
         public SuccessType DeleteFilm(int Id)
@@ -60,5 +60,13 @@ namespace Mosquito.CinemaTask.Services
 
             return deleteSuccess;
         }
+
+        public FilmModel getEditModel(int id)
+        {
+            FilmModel model = _filmRepository.getFilmByID(id);
+
+            return model;
+        }
+
     }
 }
